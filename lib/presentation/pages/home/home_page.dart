@@ -46,71 +46,67 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, state) {
-        return Scaffold(
-          extendBody: true,
-          appBar: AppBar(
-            backgroundColor: Themes.getTheme().primaryColor,
-            title: const Text('Meloplay'),
-          ),
+    return Scaffold(
+      extendBody: true,
+      appBar: AppBar(
+        backgroundColor: Themes.getTheme().primaryColor,
+        title: const Text('Meloplay'),
+      ),
 
-          // current song, play/pause button, song progress bar, song queue button
-          bottomNavigationBar: const PlayerBottomAppBar(),
-          body: Ink(
-            decoration: BoxDecoration(
-              gradient: Themes.getTheme().linearGradient,
-            ),
-            child: _hasPermission
-                ? Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Row(
-                          children: [
-                            // HomeCard(
-                            //   title: 'Favorites',
-                            //   icon: Icons.favorite_rounded,
-                            //   color: const Color(0xFF5D2285),
-                            //   onTap: () {},
-                            // ),
-                            const SizedBox(width: 16),
+      // current song, play/pause button, song progress bar, song queue button
+      bottomNavigationBar: const PlayerBottomAppBar(),
+      body: Ink(
+        decoration: BoxDecoration(
+          gradient: Themes.getTheme().linearGradient,
+        ),
+        child: _hasPermission
+            ? Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      children: [
+                        // HomeCard(
+                        //   title: 'Favorites',
+                        //   icon: Icons.favorite_rounded,
+                        //   color: const Color(0xFF5D2285),
+                        //   onTap: () {},
+                        // ),
+                        // const SizedBox(width: 16),
 
-                            const SizedBox(width: 16),
-                            // HomeCard(
-                            //   title: 'Recents',
-                            //   icon: Icons.history,
-                            //   color: const Color(0xFFD4850D),
-                            //   onTap: () {
-                            //     Navigator.of(context).pushNamed(
-                            //       AppRouter.recentsRoute,
-                            //     );
-                            //   },
-                            // ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      TabBar(
-                        controller: _tabController,
-                        tabs: tabs.map((e) => Tab(text: e)).toList(),
-                      ),
-                      Expanded(
-                        child: TabBarView(
-                          controller: _tabController,
-                          children: const [
-                            SongsView(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  )
-                : const Center(
-                    child: Text('No permission to access library'),
+                        const SizedBox(width: 16),
+                        // HomeCard(
+                        //   title: 'Recents',
+                        //   icon: Icons.history,
+                        //   color: const Color(0xFFD4850D),
+                        //   onTap: () {
+                        //     Navigator.of(context).pushNamed(
+                        //       AppRouter.recentsRoute,
+                        //     );
+                        //   },
+                        // ),
+                      ],
+                    ),
                   ),
-          ),
-        );
-      },
+                  const SizedBox(height: 16),
+                  TabBar(
+                    controller: _tabController,
+                    tabs: tabs.map((e) => Tab(text: e)).toList(),
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: const [
+                        SongsView(),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            : const Center(
+                child: Text('No permission to access library'),
+              ),
+      ),
     );
   }
 }

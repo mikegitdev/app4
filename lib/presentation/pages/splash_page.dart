@@ -38,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
               height: 200,
             ),
             const Text(
-              'Meloplay',
+              'Jafton',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 48,

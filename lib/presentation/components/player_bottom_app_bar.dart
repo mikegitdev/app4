@@ -17,14 +17,14 @@ class PlayerBottomAppBar extends StatefulWidget {
 }
 
 class _PlayerBottomAppBarState extends State<PlayerBottomAppBar> {
-  late final SongRepository songRepository;
-  //final SongRepository songRepository = SongRepository();
+  //late final SongRepository songRepository;
+  final SongRepository songRepository = SongRepository();
   bool isPlaying = false;
 
   @override
   void initState() {
     super.initState();
-    songRepository = context.read<SongRepository>();
+    //  songRepository = context.read<SongRepository>();
     songRepository.playing.listen((playing) {
       setState(() {
         isPlaying = playing;

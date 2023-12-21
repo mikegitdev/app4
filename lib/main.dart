@@ -35,24 +35,24 @@ Future<void> main() async {
   // initialize audio service
 
   await AudioPlayerManager().init();
-
+  runApp(ProviderScope(child: MyApp()));
   // run app
-  runApp(
-    RepositoryProvider(
-      create: (context) => SongRepository(),
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => ThemeBloc(),
-          ),
-          BlocProvider(
-            create: (context) => HomeBloc(),
-          ),
-        ],
-        child: const MyApp(),
-      ),
-    ),
-  );
+  // runApp(
+  //   RepositoryProvider(
+  //     create: (context) => SongRepository(),
+  //     child: MultiBlocProvider(
+  //       providers: [
+  //         BlocProvider(
+  //           create: (context) => ThemeBloc(),
+  //         ),
+  //         BlocProvider(
+  //           create: (context) => HomeBloc(),
+  //         ),
+  //       ],
+  //       child: const MyApp(),
+  //     ),
+  //   ),
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -61,16 +61,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
-      builder: (context, state) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Meloplay',
-          theme: AppThemeData.getTheme(),
-          home: const SplashPage(),
-          onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
-        );
-      },
-    );
+    return ScreenUtilInit(
+        designSize: Size(375, 812),
+        minTextAdapt: false,
+        splitScreenMode: false,
+        builder: (context, _) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Meloplay',
+            theme: AppThemeData.getTheme(),
+            home: const SplashPage(),
+            onGenerateRoute: (settings) => AppRouter.generateRoute(settings),
+          );
+        });
   }
 }
