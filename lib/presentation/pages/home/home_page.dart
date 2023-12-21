@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
-                      children: const [
+                      children: [
                         SongsView(),
                       ],
                     ),

@@ -1,7 +1,8 @@
 import 'package:app4/bloc/home/home_state.dart';
 import 'package:app4/data/repositories/home_repository.dart';
+import 'package:riverpod/riverpod.dart';
 
-class HomeNotifier extends StateNotifierProvider<HomeState> {
+class HomeNotifier extends StateNotifier<HomeState> {
   final HomeRepository repository;
 
   HomeNotifier(this.repository) : super(HomeState.initial());
@@ -12,7 +13,7 @@ class HomeNotifier extends StateNotifierProvider<HomeState> {
       final songs = await repository.getSongs();
       state = state.copyWith(isLoading: false, songs: songs);
     } catch (e, s) {
-      debugPrintStack(label: e.toString(), stackTrace: s);
+      //    debugPrintStack(label: e.toString(), stackTrace: s);
       state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
